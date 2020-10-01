@@ -13,15 +13,15 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ***************************************************************************** */
-import { ObservableArray } from "data/observable-array";
 import { EventData } from "data/observable";
+import { ObservableArray } from "data/observable-array";
 import {
-  CSSType,
   CoercibleProperty,
-  Property,
-  View,
+  CSSType,
   makeParser,
   makeValidator,
+  Property,
+  View,
 } from "ui/core/view";
 import {
   addWeakEventListener,

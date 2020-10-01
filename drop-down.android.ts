@@ -22,16 +22,16 @@ import { ItemsSource } from "ui/list-view";
 import { Font } from "ui/styling/font";
 import {
   TextAlignment,
-  TextDecoration,
   textAlignmentProperty,
+  TextDecoration,
   textDecorationProperty,
 } from "ui/text-base";
 
 import {
-  fontInternalProperty,
-  fontSizeProperty,
   backgroundColorProperty,
   colorProperty,
+  fontInternalProperty,
+  fontSizeProperty,
 } from "ui/styling/style-properties";
 
 import * as types from "utils/types";

@@ -19,26 +19,26 @@ import { ItemsSource } from "ui/list-view";
 import { Font } from "ui/styling/font";
 import { Style } from "ui/styling/style";
 import {
-  TextAlignment,
-  TextDecoration,
-  TextTransform,
-  letterSpacingProperty,
-  textAlignmentProperty,
-  textDecorationProperty,
-  textTransformProperty,
-} from "ui/text-base";
-import {
-  fontInternalProperty,
   backgroundColorProperty,
   colorProperty,
+  fontInternalProperty,
+  Length,
   paddingBottomProperty,
   paddingLeftProperty,
   paddingRightProperty,
   paddingTopProperty,
-  Length,
 } from "ui/styling/style-properties";
-import { layout } from "utils/utils-common";
+import {
+  letterSpacingProperty,
+  TextAlignment,
+  textAlignmentProperty,
+  TextDecoration,
+  textDecorationProperty,
+  TextTransform,
+  textTransformProperty,
+} from "ui/text-base";
 import * as types from "utils/types";
+import { layout } from "utils/utils-common";
 import { SelectedIndexChangedEventData } from ".";
 import {
   DropDownBase,
