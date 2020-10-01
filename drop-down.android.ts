@@ -49,9 +49,9 @@ export * from "./drop-down-common";
 
 const LABELVIEWID = "spinner-label";
 
-const enum RealizedViewType {
-  ItemView,
-  DropDownView,
+export enum RealizedViewType {
+  ItemView = 0,
+  DropDownView = 1,
 }
 
 export class DropDown extends DropDownBase {
