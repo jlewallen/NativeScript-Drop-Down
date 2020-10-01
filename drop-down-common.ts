@@ -101,7 +101,7 @@ export class ValueList<T>
       return "";
     }
 
-    return this[index].display;
+    return this.getItem(index).display;
   }
 
   public getValue(index: number): T {
@@ -109,7 +109,7 @@ export class ValueList<T>
       return null;
     }
 
-    return this[index].value;
+    return this.getItem(index).value;
   }
 
   public getIndex(value: T): number {
