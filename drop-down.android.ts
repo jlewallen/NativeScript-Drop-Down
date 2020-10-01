@@ -314,6 +314,7 @@ function initializeTNSSpinner() {
     return;
   }
 
+  @NativeClass()
   class TNSSpinnerImpl extends android.widget.Spinner {
     private _isOpenedIn = false;
     private _itemsTextAlignment: TextAlignment;
@@ -388,6 +389,7 @@ function initializeDropDownAdapter() {
     return;
   }
 
+  @NativeClass()
   class DropDownAdapterImpl
     extends android.widget.BaseAdapter
     implements android.widget.SpinnerAdapter {
@@ -569,6 +571,7 @@ function initializeDropDownItemSelectedListener() {
     return;
   }
 
+  @NativeClass()
   @Interfaces([android.widget.AdapterView.OnItemSelectedListener])
   class DropDownItemSelectedListenerImpl
     extends java.lang.Object
