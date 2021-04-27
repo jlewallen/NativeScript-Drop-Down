@@ -14,7 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ***************************************************************************** */
 import { EventData } from "data/observable";
-import { ObservableArray } from "data/observable-array";
+
+import { ObservableArray } from "@nativescript/core";
+
 import {
   CoercibleProperty,
   CSSType,
@@ -22,14 +24,15 @@ import {
   makeValidator,
   Property,
   View,
-} from "ui/core/view";
+} from "@nativescript/core";
+
 import {
   addWeakEventListener,
   removeWeakEventListener,
-} from "ui/core/weak-event-listener";
-import { ItemsSource } from "ui/list-view";
-import { TextAlignment } from "ui/text-base";
-import * as types from "utils/types";
+} from "@nativescript/core";
+
+import { CoreTypes, ItemsSource, Utils } from "@nativescript/core";
+
 import {
   DropDown as DropDownDefinition,
   SelectedIndexChangedEventData,
@@ -37,7 +40,7 @@ import {
   ValueList as ValueListDefinition,
 } from ".";
 
-export * from "ui/core/view";
+export * from "@nativescript/core";
 
 @CSSType("DropDown")
 export abstract class DropDownBase extends View implements DropDownDefinition {
@@ -46,7 +49,7 @@ export abstract class DropDownBase extends View implements DropDownDefinition {
   public static selectedIndexChangedEvent = "selectedIndexChanged";
 
   public hint: string;
-  public itemsTextAlignment: TextAlignment;
+  public itemsTextAlignment: CoreTypes.TextAlignmentType;
   public itemsPadding: string;
   public selectedIndex: number;
   public items: any[] | ItemsSource;
@@ -65,7 +68,7 @@ export abstract class DropDownBase extends View implements DropDownDefinition {
       return " ";
     }
 
-    if (types.isNullOrUndefined(index)) {
+    if (Utils.isNullOrUndefined(index)) {
       return null;
     }
 
@@ -93,7 +96,7 @@ export class ValueList<T>
   extends ObservableArray<ValueItem<T>>
   implements ValueListDefinition<T> {
   public getDisplay(index: number): string {
-    if (types.isNullOrUndefined(index)) {
+    if (Utils.isNullOrUndefined(index)) {
       return null;
     }
 
@@ -105,7 +108,7 @@ export class ValueList<T>
   }
 
   public getValue(index: number): T {
-    if (types.isNullOrUndefined(index) || index < 0 || index >= this.length) {
+    if (Utils.isNullOrUndefined(index) || index < 0 || index >= this.length) {
       return null;
     }
 
@@ -193,12 +196,17 @@ export const hintProperty = new Property<DropDownBase, string>({
 });
 hintProperty.register(DropDownBase);
 
-const textAlignmentConverter = makeParser<TextAlignment>(
-  makeValidator<TextAlignment>("initial", "left", "center", "right")
+const textAlignmentConverter = makeParser<CoreTypes.TextAlignmentType>(
+  makeValidator<CoreTypes.TextAlignmentType>(
+    "initial",
+    "left",
+    "center",
+    "right"
+  )
 );
 export const itemsTextAlignmentProperty = new Property<
   DropDownBase,
-  TextAlignment
+  CoreTypes.TextAlignmentType
 >({
   name: "itemsTextAlignment",
   defaultValue: "initial",

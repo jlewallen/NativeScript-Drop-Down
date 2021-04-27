@@ -14,28 +14,35 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ***************************************************************************** */
 import { Color } from "color";
-import { View } from "ui/core/view";
-import { placeholderColorProperty } from "ui/editable-text-base/editable-text-base-common";
-import { Label } from "ui/label";
-import { StackLayout } from "ui/layouts/stack-layout";
-import { ItemsSource } from "ui/list-view";
-import { Font } from "ui/styling/font";
+
+import { View } from "@nativescript/core";
+
+import { placeholderColorProperty } from "@nativescript/core";
+
+import { Label } from "@nativescript/core";
+
+import { StackLayout } from "@nativescript/core";
+
+import { ItemsSource } from "@nativescript/core";
+
+import { Font } from "@nativescript/core";
+
 import {
-  TextAlignment,
   textAlignmentProperty,
-  TextDecoration,
   textDecorationProperty,
-} from "ui/text-base";
+} from "@nativescript/core";
+
+import { CoreTypes, Utils } from "@nativescript/core";
 
 import {
   backgroundColorProperty,
   colorProperty,
   fontInternalProperty,
   fontSizeProperty,
-} from "ui/styling/style-properties";
+} from "@nativescript/core";
 
-import * as types from "utils/types";
 import { SelectedIndexChangedEventData } from ".";
+
 import {
   DropDownBase,
   hintProperty,
@@ -96,7 +103,7 @@ export class DropDown extends DropDownBase {
 
     // When used in templates the selectedIndex changed event is fired before the native widget is init.
     // So here we must set the inital value (if any)
-    if (!types.isNullOrUndefined(this.selectedIndex)) {
+    if (!Utils.isNullOrUndefined(this.selectedIndex)) {
       this.android.setSelection(this.selectedIndex + 1); // +1 for the hint first element
     }
     nativeView.itemsTextAlignment = itemsTextAlignmentProperty.defaultValue;
@@ -144,7 +151,7 @@ export class DropDown extends DropDownBase {
   }
 
   public [colorProperty.setNative](value: Color | number) {
-    if (!types.isNullOrUndefined(value)) {
+    if (!Utils.isNullOrUndefined(value)) {
       this._propagateStylePropertyToRealizedViews("color", value, false);
     }
   }
@@ -156,7 +163,7 @@ export class DropDown extends DropDownBase {
   }
 
   public [fontSizeProperty.setNative](value: number | { nativeSize: number }) {
-    if (!types.isNullOrUndefined(value)) {
+    if (!Utils.isNullOrUndefined(value)) {
       this._propagateStylePropertyToRealizedViews("fontSize", value, true);
     }
   }
@@ -186,24 +193,28 @@ export class DropDown extends DropDownBase {
     selectedIndexProperty.coerce(this);
   }
 
-  public [itemsTextAlignmentProperty.getDefault](): TextAlignment {
+  public [itemsTextAlignmentProperty.getDefault](): CoreTypes.TextAlignmentType {
     return "initial";
   }
-  public [itemsTextAlignmentProperty.setNative](value: TextAlignment) {
+  public [itemsTextAlignmentProperty.setNative](
+    value: CoreTypes.TextAlignmentType
+  ) {
     this.nativeView.itemsTextAlignment = value;
   }
 
-  public [textDecorationProperty.getDefault](): TextDecoration {
+  public [textDecorationProperty.getDefault](): CoreTypes.TextDecorationType {
     return "none";
   }
-  public [textDecorationProperty.setNative](value: TextDecoration) {
+  public [textDecorationProperty.setNative](
+    value: CoreTypes.TextDecorationType
+  ) {
     this._propagateStylePropertyToRealizedViews("textDecoration", value, true);
   }
 
-  public [textAlignmentProperty.getDefault](): TextAlignment {
+  public [textAlignmentProperty.getDefault](): CoreTypes.TextAlignmentType {
     return "left";
   }
-  public [textAlignmentProperty.setNative](value: TextAlignment) {
+  public [textAlignmentProperty.setNative](value: CoreTypes.TextAlignmentType) {
     this._propagateStylePropertyToRealizedViews("textAlignment", value, true);
   }
 
@@ -219,7 +230,7 @@ export class DropDown extends DropDownBase {
     return null;
   }
   public [selectedIndexProperty.setNative](value: number) {
-    const actualIndex = types.isNullOrUndefined(value) ? 0 : value + 1;
+    const actualIndex = Utils.isNullOrUndefined(value) ? 0 : value + 1;
     this.nativeView.setSelection(actualIndex);
   }
 
@@ -317,7 +328,7 @@ function initializeTNSSpinner() {
   @NativeClass()
   class TNSSpinnerImpl extends android.widget.Spinner {
     private _isOpenedIn = false;
-    private _itemsTextAlignment: TextAlignment;
+    private _itemsTextAlignment: CoreTypes.TextAlignmentType;
     private _itemsPadding: string;
 
     constructor(private owner: WeakRef<DropDown>) {
@@ -325,10 +336,10 @@ function initializeTNSSpinner() {
       return global.__native(this);
     }
 
-    get itemsTextAlignment(): TextAlignment {
+    get itemsTextAlignment(): CoreTypes.TextAlignmentType {
       return this._itemsTextAlignment;
     }
-    set itemsTextAlignment(value: TextAlignment) {
+    set itemsTextAlignment(value: CoreTypes.TextAlignmentType) {
       this._itemsTextAlignment = value;
     }
 
@@ -538,7 +549,7 @@ function initializeDropDownAdapter() {
           // HACK: if there is no hint defined, make the view in the drop down virtually invisible.
           if (
             realizedViewType === RealizedViewType.DropDownView &&
-            (types.isNullOrUndefined(owner.hint) || owner.hint === "")
+            (Utils.isNullOrUndefined(owner.hint) || owner.hint === "")
           ) {
             view.height = 1;
           }

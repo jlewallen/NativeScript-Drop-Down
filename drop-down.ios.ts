@@ -30,13 +30,13 @@ import {
 } from "ui/styling/style-properties";
 import {
   letterSpacingProperty,
-  TextAlignment,
   textAlignmentProperty,
-  TextDecoration,
   textDecorationProperty,
-  TextTransform,
   textTransformProperty,
 } from "ui/text-base";
+
+import { CoreTypes } from "@nativescript/core";
+
 import * as types from "utils/types";
 import { layout } from "utils/utils-common";
 import { SelectedIndexChangedEventData } from ".";
@@ -209,10 +209,12 @@ export class DropDown extends DropDownBase {
     this.ios.hint = value;
   }
 
-  public [itemsTextAlignmentProperty.getDefault](): TextAlignment {
+  public [itemsTextAlignmentProperty.getDefault](): CoreTypes.TextAlignmentType {
     return "initial";
   }
-  public [itemsTextAlignmentProperty.setNative](value: TextAlignment) {
+  public [itemsTextAlignmentProperty.setNative](
+    value: CoreTypes.TextAlignmentType
+  ) {
     this.nativeView.itemsTextAlignment = value;
   }
 
@@ -267,7 +269,7 @@ export class DropDown extends DropDownBase {
     this.nativeView.font = font;
   }
 
-  public [textAlignmentProperty.setNative](value: TextAlignment) {
+  public [textAlignmentProperty.setNative](value: CoreTypes.TextAlignmentType) {
     switch (value) {
       case "initial":
       case "left":
@@ -284,11 +286,13 @@ export class DropDown extends DropDownBase {
     }
   }
 
-  public [textDecorationProperty.setNative](value: TextDecoration) {
+  public [textDecorationProperty.setNative](
+    value: CoreTypes.TextDecorationType
+  ) {
     _setTextAttributes(this.nativeView, this.style);
   }
 
-  public [textTransformProperty.setNative](value: TextTransform) {
+  public [textTransformProperty.setNative](value: CoreTypes.TextTransformType) {
     _setTextAttributes(this.nativeView, this.style);
   }
 
@@ -296,25 +300,25 @@ export class DropDown extends DropDownBase {
     _setTextAttributes(this.nativeView, this.style);
   }
 
-  public [paddingTopProperty.setNative](value: Length) {
+  public [paddingTopProperty.setNative](value: CoreTypes.LengthType) {
     this._setPadding({
       top: layout.toDeviceIndependentPixels(this.effectivePaddingTop),
     });
   }
 
-  public [paddingRightProperty.setNative](value: Length) {
+  public [paddingRightProperty.setNative](value: CoreTypes.LengthType) {
     this._setPadding({
       right: layout.toDeviceIndependentPixels(this.effectivePaddingRight),
     });
   }
 
-  public [paddingBottomProperty.setNative](value: Length) {
+  public [paddingBottomProperty.setNative](value: CoreTypes.LengthType) {
     this._setPadding({
       bottom: layout.toDeviceIndependentPixels(this.effectivePaddingBottom),
     });
   }
 
-  public [paddingLeftProperty.setNative](value: Length) {
+  public [paddingLeftProperty.setNative](value: CoreTypes.LengthType) {
     this._setPadding({
       left: layout.toDeviceIndependentPixels(this.effectivePaddingLeft),
     });
@@ -537,7 +541,7 @@ class TNSDropDownLabel extends TNSLabel {
   private _hasText: boolean;
   private _internalColor: UIColor;
   private _internalPlaceholderColor: UIColor;
-  private _itemsTextAlignment: TextAlignment;
+  private _itemsTextAlignment: CoreTypes.TextAlignmentType;
   private _itemsPadding: string;
 
   get inputView(): UIView {
@@ -603,10 +607,10 @@ class TNSDropDownLabel extends TNSLabel {
     _setTextAttributes(owner.nativeView, owner.style);
   }
 
-  get itemsTextAlignment(): TextAlignment {
+  get itemsTextAlignment(): CoreTypes.TextAlignmentType {
     return this._itemsTextAlignment;
   }
-  set itemsTextAlignment(value: TextAlignment) {
+  set itemsTextAlignment(value: CoreTypes.TextAlignmentType) {
     this._itemsTextAlignment = value;
   }
 
